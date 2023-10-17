@@ -1,0 +1,40 @@
+{{- if .Values.ecrJob.enabled -}}
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ecr-registry-helper
+  namespace: {{ .Values.namespace | default .Release.Namespace }}
+spec:
+  schedule: "{{ .Values.ecrJob.schedule }}"  # Run every 11 hours 0 */11 * * * , for testing */5 * * * *
+  successfulJobsHistoryLimit: 2
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec: 
+          imagePullSecrets:
+            - name: {{ .Values.ecrJob.toolImageRegistrySecret }}    # Secret for pulling images from pflege-de github container registries
+          serviceAccountName: sa-ecr # Replace with your service account name if different
+          containers:
+          - name: ecr-registry-helper
+            image: {{ .Values.ecrJob.toolImage }} #ghcr.io/pflege-de/awscli-kubectl:v1.0
+            imagePullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: {{ .Values.ecrJob.awsCredentialSecret }} # Replace with your secret name if different
+              - configMapRef:
+                  name: ecr-registry-helper-cm # Replace with your configmap name if different
+            command:
+              - /bin/bash
+              - -c
+              - |-
+                set -e
+                env
+                ECR_TOKEN="$(aws ecr get-login-password --region ${AWS_REGION})"
+                kubectl delete secret --ignore-not-found $REGISTRY_SECRET -n $NAMESPACE_NAME
+                kubectl create secret docker-registry $REGISTRY_SECRET --docker-server=https://${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com --docker-username=AWS --docker-password=${ECR_TOKEN} --namespace=$NAMESPACE_NAME
+                echo "Secret was successfully updated at $(date) for namespace $NAMESPACE_NAME"
+          restartPolicy: Never
+
+{{- end }}

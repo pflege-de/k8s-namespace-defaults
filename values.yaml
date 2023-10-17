@@ -1,0 +1,28 @@
+# Default values for namespace-default.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+#namespace: <your namespace name> # uncomment if you want to define the namespace in the values file instead of using the namespace defined when calling helm
+
+ecrJob:
+  enabled: true # set to false in case you do not want to deploy the ECR job
+  schedule: "0 */11 * * *" # Run every 11 hours 0 */11 * * * , for testing */5 * * * *
+  awsAccount: "347728829864" # Replace with your AWS account ID
+  awsRegion: "eu-central-1" # Replace with your ECR region
+  awsCredentialSecret: "aws-credentials" #name of the secret where AWS login credentials are stored"
+  ecrRegistrySecret: ecr-pull-secret # Replace with your desired ECR token secret name
+  toolImage: "ghcr.io/pflege-de/awscli-kubectl:v1.0" # Image with kubectl and aws-cli
+  toolImageRegistrySecret: "ghcr-pull-secret" # name for docker-credential-secret for accessing image registry where toolImage is hosted
+
+
+resourceQuota: # limit for aggregate resource consumption in the namespace
+  requestsCpu: "1"
+  requestsMemory: 1Gi
+  limitsCpu: "2"
+  limitsMemory: 2Gi
+
+limitRange: # limits for individual objects (primarily pods) within the namespace
+  maxCpu: "2"
+  maxMemory: 2Gi
+  minCpu: "0.5"
+  minMemory: 128Mi

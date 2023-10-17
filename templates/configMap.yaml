@@ -1,0 +1,15 @@
+{{- if .Values.ecrJob.enabled -}}
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ecr-registry-helper-cm
+  namespace: {{ .Values.namespace | default .Release.Namespace }}
+data:
+  AWS_ACCOUNT: "{{ .Values.ecrJob.awsAccount }}" 
+  AWS_REGION: "{{ .Values.ecrJob.awsRegion }}" 
+  REGISTRY_SECRET: "{{ .Values.ecrJob.ecrRegistrySecret }}" # Replace with your desired ECR token secret name
+  NAMESPACE_NAME: "{{ .Values.namespace | default .Release.Namespace }}"
+  
+{{- end }}
+
