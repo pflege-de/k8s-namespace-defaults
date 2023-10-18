@@ -35,3 +35,21 @@ The ECR credential management part of the chart assumes that the following secre
 * toolImageRegistrySecret
 
 Ideally these secrets will be configured as sealed secret within the code base that incorporates this helm chart.
+
+## Updating this chart and publishing a new version
+
+After changing any parts of the helm chart, please increase both versionsin the `Chart.yaml` file
+
+Ensure that you have pulled the github pages branch `gh-pages` and that it is up-to-date
+
+```
+git checkout gh-pages
+git pull origin/gh-pages
+```
+
+Checkout again the `main` branch an ran the following 3 commands
+```
+cr package
+cr upload --owner pflege-de -r k8s-namespace-defaults --token <your-github-token> --skip-existing
+cr index --owner pflege-de -r k8s-namespace-defaults --token <your-github-token> --index-path ./ --push
+```
