@@ -1,3 +1,5 @@
+{{- if .Values.resourceQuota.enabled -}}
+
 apiVersion: v1
 kind: ResourceQuota
 metadata:
@@ -8,3 +10,5 @@ spec:
     requests.memory: {{ .Values.resourceQuota.requestsMemory }}
     limits.cpu: "{{ .Values.resourceQuota.limitsCpu }}"
     limits.memory: {{ .Values.resourceQuota.limitsMemory }}
+
+{{- end }}
