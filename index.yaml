@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   namespace-default:
   - apiVersion: v2
+    appVersion: 1.0.1
+    created: "2023-10-18T20:14:01.049117425+02:00"
+    description: A Helm chart for deploying pflegede defaults objects into your namespace
+    digest: 33d7be6376c6dbefd04de63ac934fd0ae75147e9a310efcb1e670d1bbd9fa304
+    name: namespace-default
+    type: application
+    urls:
+    - https://github.com/pflege-de/k8s-namespace-defaults/releases/download/namespace-default-1.0.1/namespace-default-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
     appVersion: 1.0.0
     created: "2023-10-17T22:52:32.849293496+02:00"
     description: A Helm chart for deploying pflegede defaults objects into your namespace
@@ -11,4 +21,4 @@ entries:
     urls:
     - https://github.com/pflege-de/k8s-namespace-defaults/releases/download/namespace-default-1.0.0/namespace-default-1.0.0.tgz
     version: 1.0.0
-generated: "2023-10-17T22:52:32.849350838+02:00"
+generated: "2023-10-18T20:14:01.049138123+02:00"
