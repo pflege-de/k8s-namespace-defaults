@@ -5,6 +5,7 @@
 #namespace: <your namespace name> # uncomment if you want to define the namespace in the values file instead of using the namespace defined when calling helm
 
 ecrJob:
+  baseName: ecr # change in case you want to deploy multiple ecr cronjobs into the same namespace (f.e. when using this inside argoworkflows)
   enabled: true # set to false in case you do not want to deploy the ECR job
   schedule: "0 */11 * * *" # Run every 11 hours 0 */11 * * * , for testing */5 * * * *
   awsAccount: "347728829864" # Replace with your AWS account ID

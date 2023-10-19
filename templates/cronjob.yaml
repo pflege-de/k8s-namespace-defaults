@@ -3,7 +3,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: ecr-registry-helper
+  name: {{ .Values.ecrJob.baseName }}-registry-helper
   namespace: {{ .Values.namespace | default .Release.Namespace }}
 spec:
   schedule: "{{ .Values.ecrJob.schedule }}"  # Run every 11 hours 0 */11 * * * , for testing */5 * * * *
@@ -15,16 +15,16 @@ spec:
         spec: 
           imagePullSecrets:
             - name: {{ .Values.ecrJob.toolImageRegistrySecret }}    # Secret for pulling images from pflege-de github container registries
-          serviceAccountName: sa-ecr # Replace with your service account name if different
+          serviceAccountName: sa-{{ .Values.ecrJob.baseName }} # Replace with your service account name if different
           containers:
-          - name: ecr-registry-helper
+          - name: {{ .Values.ecrJob.baseName }}-registry-helper
             image: {{ .Values.ecrJob.toolImage }} #ghcr.io/pflege-de/awscli-kubectl:v1.0
             imagePullPolicy: IfNotPresent
             envFrom:
               - secretRef:
                   name: {{ .Values.ecrJob.awsCredentialSecret }} # Replace with your secret name if different
               - configMapRef:
-                  name: ecr-registry-helper-cm # Replace with your configmap name if different
+                  name: {{ .Values.ecrJob.baseName }}-registry-helper-cm # Replace with your configmap name if different
             command:
               - /bin/bash
               - -c

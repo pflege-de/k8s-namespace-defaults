@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ecr-registry-helper-cm
+  name: {{ .Values.ecrJob.baseName }}-registry-helper-cm
   namespace: {{ .Values.namespace | default .Release.Namespace }}
 data:
   AWS_ACCOUNT: "{{ .Values.ecrJob.awsAccount }}" 
