@@ -1,0 +1,24 @@
+apiVersion: v1
+entries:
+  namespace-default:
+  - apiVersion: v2
+    appVersion: 1.0.10
+    created: "2023-10-20T14:33:16.432222091+02:00"
+    description: A Helm chart for deploying pflegede defaults objects into your namespace
+    digest: 55647735ac544ae6784d607614fbc4727e5c22427bfa7fb8a8f77921c4fdd58b
+    name: namespace-default
+    type: application
+    urls:
+    - namespace-default-1.0.10.tgz
+    version: 1.0.10
+  - apiVersion: v2
+    appVersion: 1.0.9
+    created: "2023-10-20T14:33:18.902639353+02:00"
+    description: A Helm chart for deploying pflegede defaults objects into your namespace
+    digest: 42a63e47a92b6525d31aecaa675ac2c6b5bd782a7d63ee500a2fc8e40d2f2690
+    name: namespace-default
+    type: application
+    urls:
+    - namespace-default-1.0.9.tgz
+    version: 1.0.9
+generated: "2023-10-20T14:33:18.902676964+02:00"
