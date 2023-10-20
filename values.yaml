@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-#namespace: <your namespace name> # uncomment if you want to define the namespace in the values file instead of using the namespace defined when calling helm
+namespace: "<your namespace name>"
 
 ecrJob:
   baseName: ecr # change in case you want to deploy multiple ecr cronjobs into the same namespace (f.e. when using this inside argoworkflows)
@@ -18,14 +18,14 @@ ecrJob:
 
 resourceQuota: # limit for aggregate resource consumption in the namespace
   enabled: true # set to false in case you do not want to deploy the resource quota
-  requestsCpu: "1"
-  requestsMemory: 1Gi
-  limitsCpu: "2"
-  limitsMemory: 2Gi
+  requestsCpu: "250m"
+  requestsMemory: "512Mi"
+  limitsCpu: "500m"
+  limitsMemory: "1Gi"
 
 limitRange: # limits for individual objects (primarily pods) within the namespace
   enabled: true # set to false in case you do not want to deploy the limit range
-  maxCpu: "2"
-  maxMemory: 2Gi
-  minCpu: "0.5"
-  minMemory: 128Mi
+  maxCpu: "500m"
+  maxMemory: 1Gi
+  minCpu: "1m"
+  minMemory: 1Mi

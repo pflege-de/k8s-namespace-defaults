@@ -4,7 +4,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: {{ .Values.ecrJob.baseName }}-registry-helper
-  namespace: {{ .Values.namespace | default .Release.Namespace }}
+  namespace: {{ .Values.namespace  }}
 spec:
   schedule: "{{ .Values.ecrJob.schedule }}"  # Run every 11 hours 0 */11 * * * , for testing */5 * * * *
   successfulJobsHistoryLimit: 2

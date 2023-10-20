@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: ResourceQuota
 metadata:
-  name: {{ .Values.namespace | default .Release.Namespace }}-resource-quota
+  name: {{ .Values.namespace  }}-resource-quota
 spec:
   hard:
     requests.cpu: "{{ .Values.resourceQuota.requestsCpu }}"

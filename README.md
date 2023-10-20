@@ -8,7 +8,7 @@ A helm chart for attaching the following default objects to pflegede namespaces:
 ## Installing the chart via Helm
  
 ```console
-helm upgrade --install namespace-default -n ecr-helm -f values.yaml ./
+helm upgrade --install -f values.yaml ./
 ```
 
 ## Adding the helm chart into a kustomization.yaml file (either into the base or overlay files)
