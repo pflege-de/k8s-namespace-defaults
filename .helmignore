@@ -7,3 +7,4 @@
 # Match previous releases
 .cr-release-packages
 .cr-old-releases
+index.yaml
