@@ -53,3 +53,27 @@ cr package
 cr upload --owner pflege-de -r k8s-namespace-defaults --token <your-github-token> --skip-existing
 cr index --owner pflege-de -r k8s-namespace-defaults --token <your-github-token> --index-path ./ --push
 ```
+
+## Kubernetes Objects 
+
+This chart will create these objects in every namespace (when enabled)
+
+```mermaid
+
+graph LR;
+
+subgraph ECR credential handling
+cronjob-- schedules -->job[Job]-- executes -->Pod[Pod];
+Pod-. reads environment from .->configmap[configmap];
+Pod-. reads registry-credentials from .->pullsecret[pull secret];
+Pod-. reads AWS login credentials from .->awssecret[AWS secret];
+Pod-. uses service account with permission to delete/create ECR secret .->sa[service account];
+Pod-- recreates ECR secret -->ecrsecret[ECR secret];
+end
+
+subgraph Resource Management
+Limitrange[LimitRange];
+ResourceQuota[Resource Quota]
+end
+
+ ```
