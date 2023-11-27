@@ -54,9 +54,10 @@ cr upload --owner pflege-de -r k8s-namespace-defaults --token <your-github-token
 cr index --owner pflege-de -r k8s-namespace-defaults --token <your-github-token> --index-path ./ --push
 ```
 
-## Kubernetes Objects 
+## ECR Secret management
 
-This chart will create these objects in every namespace (when enabled)
+To enable ECR secret management, set the flag `ecrJob.enabled` in `values.yaml` to `true`.
+This chart will then create the following objects to create and periodically update the ecr secret: 
 
 ```mermaid
 
@@ -71,9 +72,8 @@ Pod-. uses service account with permission to delete/create ECR secret .->sa[ser
 Pod-- recreates ECR secret -->ecrsecret[ECR secret];
 end
 
-subgraph Resource Management
-Limitrange[LimitRange];
-ResourceQuota[Resource Quota]
-end
-
  ```
+
+ In addition, if the flag `ecrJob.dualRegistrySecret.enabled` is set to `true`, an additional registry secret gets created that combined the credentials from the contained in the secrets `ecrJob.ecrRegistrySecret` and `ecrJob.dualRegistrySecret.dualSecretName`.
+
+ This registry secret with credentials for two registries is necessary in case a kaniko build needs to push images into to registries.

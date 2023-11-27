@@ -10,6 +10,9 @@ data:
   AWS_REGION: "{{ .Values.ecrJob.awsRegion }}" 
   REGISTRY_SECRET: "{{ .Values.ecrJob.ecrRegistrySecret }}" # Replace with your desired ECR token secret name
   NAMESPACE_NAME: "{{ .Values.namespace  }}"
+  CREATE_DUAL_REGISTRY_SECRET: "{{ .Values.ecrJob.dualRegistrySecret.enabled }}"
+  DUAL_REGISTRY_SECRET: "{{ .Values.ecrJob.dualRegistrySecret.dualSecretName }}"
+  SECOND_REGISTRY_SECRET: "{{ .Values.ecrJob.dualRegistrySecret.registrySecret }}"
   
 {{- end }}
 

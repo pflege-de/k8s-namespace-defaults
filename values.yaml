@@ -12,9 +12,12 @@ ecrJob:
   awsRegion: "eu-central-1" # Replace with your ECR region
   awsCredentialSecret: "aws-credentials" #name of the secret where AWS login credentials are stored"
   ecrRegistrySecret: ecr-pull-secret # Replace with your desired ECR token secret name
-  toolImage: "ghcr.io/pflege-de/awscli-kubectl:v1.0" # Image with kubectl and aws-cli
+  toolImage: "ghcr.io/pflege-de/awscli-kubectl:v1.2" # Image with kubectl and aws-cli
   toolImageRegistrySecret: "ghcr-pull-secret" # name for docker-credential-secret for accessing image registry where toolImage is hosted
-
+  dualRegistrySecret:
+    enabled: false # enable if ECR registry secret should be combined with this second secret into a single registry secret (as one dockerconfigjson file)
+    registrySecret: "" # name of the second secret that will be combined with the ECR registry secret
+    dualSecretName: "dual-registry-secret" # name of the secret that will contian the docker config json file that combined the two registry secrets
 
 resourceQuota: # limit for aggregate resource consumption in the namespace
   enabled: true # set to false in case you do not want to deploy the resource quota
