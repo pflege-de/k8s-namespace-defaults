@@ -20,6 +20,13 @@ spec:
           - name: {{ .Values.ecrJob.baseName }}-registry-helper
             image: {{ .Values.ecrJob.toolImage }} #ghcr.io/pflege-de/awscli-kubectl:v1.0
             imagePullPolicy: IfNotPresent
+            resources:
+              limits:
+                cpu: 100m
+                memory: 250Mi
+              requests:
+                cpu: 100m
+                memory: 250Mi
             envFrom:
               - secretRef:
                   name: {{ .Values.ecrJob.awsCredentialSecret }} # Replace with your secret name if different

@@ -19,6 +19,13 @@ ecrJob:
     registrySecret: "" # name of the second secret that will be combined with the ECR registry secret
     dualSecretName: "dual-registry-secret" # name of the secret that will contian the docker config json file that combined the two registry secrets
 
+gitJob:
+  enabled: false # set to true in case you want to deploy the git rebuilder cronjob
+  schedule: "0 0 * * *" # Run every day at midnight
+  githubSshSecret: "github-ssh-secret" #name of the secret where AWS login credentials are stored"
+  repoUrl: "undefined"
+  branch: "undefined"
+
 resourceQuota: # limit for aggregate resource consumption in the namespace
   enabled: true # set to false in case you do not want to deploy the resource quota
   requestsCpu: "250m"

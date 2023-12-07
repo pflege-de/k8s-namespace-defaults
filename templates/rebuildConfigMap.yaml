@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.namespace  }}-git-rebuilder-cm
+data:
+  REPO_URL: "{{ .Values.gitJob.repoUrl }}" 
+  BRANCH: "{{ .Values.gitJob.branch }}" 
