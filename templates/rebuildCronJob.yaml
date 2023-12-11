@@ -22,13 +22,13 @@ spec:
             resources:
               limits:
                 cpu: 100m
-                memory: 250Mi
+                memory: 100Mi
               requests:
-                cpu: 100m
-                memory: 250Mi
+                cpu: 50m
+                memory: 50Mi
             envFrom:
               - configMapRef:
-                  name: {{ .Values.namespace  }}-git-rebuilder-cm 
+                  name: {{ .Values.namespace  }}-git-rebuilder-cm
             args:
             - |
               echo "setting user.email"

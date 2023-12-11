@@ -23,10 +23,10 @@ spec:
             resources:
               limits:
                 cpu: 100m
-                memory: 250Mi
+                memory: 100Mi
               requests:
-                cpu: 100m
-                memory: 250Mi
+                cpu: 50m
+                memory: 50Mi
             envFrom:
               - secretRef:
                   name: {{ .Values.ecrJob.awsCredentialSecret }} # Replace with your secret name if different
