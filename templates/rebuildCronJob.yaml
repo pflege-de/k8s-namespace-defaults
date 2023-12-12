@@ -45,7 +45,7 @@ spec:
             - name: ssh-key-volume
               mountPath: /tmp/ssh-key
           restartPolicy: Never
-  successfulJobsHistoryLimit: 3  # Keep a maximum of 3 successful job history
+  successfulJobsHistoryLimit: 0  # do not keep any successfull jobs
   failedJobsHistoryLimit: 1      # Keep a maximum of 1 failed job history
 
 {{- end }}
