@@ -20,8 +20,10 @@ helmCharts:
 ```
 The file `values.yaml` allows to configure which of the above mentioned default objects you want to create (via `enabled` flags).
 
-So for example if you don't want to deploy the ECR cronjob but want to keep the resourceQuota and limitRange objects that are also enabled by default) and also want to change the max cpu value of the limit range you would need to change the following parameters:
+So for example if you don't want to deploy the ECR cronjob but want to define the resourceQuota and limitRange objects that are disabled by default) and also want to change the max cpu value of the limit range you would need to change the following parameters:
 * `ecrJob.enabled: false`
+* `resourceQuota.enabled: true`
+* `limitRange.enabled: true`
 * `limitRange.maxCPU: 1`
 
 So the above section would look like this:
@@ -33,11 +35,14 @@ helmCharts:
       namespace: <your-namespace>
       ecrJob:
         enabled: false
+      resourceQuota:
+        enabled: true
       limitRange: 
+        enabled: true
         maxCpu: "1"
     repo: https://pflege-de.github.io/k8s-namespace-defaults/
     releaseName: namespace-defaults
-    version: 2.0.0
+    version: 2.1.0
 ```
 
 
