@@ -7,8 +7,9 @@ metadata:
   namespace: {{ .Values.namespace  }}
 spec:
   schedule: "{{ .Values.ecrJob.schedule }}"  # Run every 11 hours 0 */11 * * * , for testing */5 * * * *
-  successfulJobsHistoryLimit: 0
-  failedJobsHistoryLimit: 1      # Keep a maximum of 1 failed job history
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  concurrencyPolicy: Forbid
   suspend: false
   jobTemplate:
     spec:
