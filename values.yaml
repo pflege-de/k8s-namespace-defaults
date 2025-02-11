@@ -5,6 +5,7 @@
 namespace: "<your namespace name>"
 
 ecrJob:
+  annotations:
   baseName: ecr   # change if you want multiple ecr cronjobs in same namespace
   enabled: true   # set to false if you do not want to deploy the ECR job
   schedule: "0 */11 * * *"   # every 11 hours, for every 5 min use */5 * * * *
